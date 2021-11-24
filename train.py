@@ -89,8 +89,7 @@ def clone_as_averaged_model(model, ema):
     averaged_model = build_model()
     averaged_model.to(device)
     averaged_model.load_state_dict(model.state_dict())
-
-	for name, param in averaged_model.named_parameters():
+    for name, param in averaged_model.named_parameters():
         if name in ema.shadow:
             param.data = ema.shadow[name].clone().data
     return averaged_model
